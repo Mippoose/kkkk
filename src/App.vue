@@ -40,6 +40,7 @@ export default {
 		},
 		OpenMenu(name = ''){
 			this.$store.dispatch('setActiveMenu',name);
+			this.SendNotify('Success!', 'Ure GAY', 'success')
 		},
 		ToggleElement(name, toggle = true){
 			this.$store.dispatch(toggle ? 'addActiveElement' : 'removeActiveElement',name);
@@ -47,12 +48,26 @@ export default {
 		GetComponent(name){
 			return this.$refs[name];
 		},
+		SendNotify(ttle, msg, type){
+			this.showLoginError({
+				title: ttle,
+				message: msg,
+				type: type,
+			})
+		}
   },
   computed: {
     ...mapGetters([
 			'GetActiveMenu'
 		]),
-  }
+  },
+  notifications: {
+      showLoginError: {
+        title: 'Login Failed',
+        message: 'Failed to authenticate',
+        type: 'error'
+      }
+    }
 }
 </script>
 
